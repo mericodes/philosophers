@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:29:07 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/15 19:18:20 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:51:37 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	init_forks(t_data *data)
 	i = 0;
 	while (i < data->total_philos)
 	{
-		data->forks[i].id = i + 1;
+		data->forks[i].fork_id = i + 1;
 		if (pthread_mutex_init(&data->forks[i].mfork, NULL) != 0)
 			return (0);
 		// printf("FORK ID::::::::; %i\n", data->forks[i].fork_id);
@@ -36,10 +36,9 @@ int	init_data(t_data *data)
 	data->forks = malloc(sizeof(t_fork) * data->total_philos);
 	if (!data->forks)
 		return (0);
+	data->end = 0;
 	if (!init_forks(data))
 		return (0);
-	data->dead = 0;
-	data->finish = 0;
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:16:00 by mlopez-i          #+#    #+#             */
-/*   Updated: 2024/01/15 19:29:23 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:06:14 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_routine(void *dat)
 	t_philo	*ph;
 
 	ph = (t_philo *)dat;
-	printf("PHILO::::: %i  DERECHA::::: %i  IZQUIERDA::::: %i\n", ph->philo, ph->r_fork->id, ph->l_fork->id);
+	printf("PHILO:::::::::::   %i\n", ph->philo);
 	return (NULL);
 }
 
@@ -41,9 +41,9 @@ int	create_philos(t_data *data)
 			data->philos[i].l_fork = &data->forks[i - 1];
 		else if (data->total_philos == 1)
 			data->philos[i].l_fork = NULL;
-		// printf("PHILO ID::::::::; %i  ", data->philos[i].philo);
-		// printf("RIGHT FORK ID::::::::; %i  ", data->philos[i].r_fork->id);
-		// printf("LEFT FORK ID::::::::; %i\n", data->philos[i].l_fork->id);
+		printf("PHILO ID::::::::; %i  ", data->philos[i].philo);
+		printf("RIGHT FORK ID::::::::; %i  ", data->philos[i].r_fork->fork_id);
+		printf("LEFT FORK ID::::::::; %i\n", data->philos[i].l_fork->fork_id);
 		if (pthread_create(&data->philos[i].thread,
 				NULL, &ft_routine, &data->philos[i]) != 0)
 			return (0);

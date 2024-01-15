@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:29:34 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/15 19:22:49 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:37:28 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,19 @@
 typedef struct s_fork
 {
 	pthread_mutex_t	mfork;
-	int				id;
+	int				fork_id;
 }	t_fork;
 
 /*	struct of each philosopher	*/
 typedef struct s_philo
 {
-	struct s_data		*data;
 	pthread_t			thread;
+	//pthread_mutex_t		eat_mutex;
 	int					philo;
+	//int					id;
+	int					last_meal;
 	int					eating;
 	int					meals_eaten;
-	int					last_meal;
 	t_fork				*l_fork;
 	t_fork				*r_fork;
 }	t_philo;
@@ -48,17 +49,14 @@ typedef struct s_philo
 /*	struct of general data	*/
 typedef struct s_data
 {
-	int				total_philos;
-	long			time_to_die;
-	long			time_to_eat;
-	long			time_to_sleep;
-	int				num_to_eat;
-	int				start_time;
-	int				dead;
-	int				finish;
-	t_philo			*philos;
-	t_fork			*forks;
-	pthread_mutex_t	mwrite;
+	int		total_philos;
+	long	time_to_die;
+	long	time_to_eat;
+	long	time_to_sleep;
+	int		num_to_eat;
+	int		end;
+	t_philo	*philos;
+	t_fork	*forks;
 }	t_data;
 
 /*	argcs.c		*/

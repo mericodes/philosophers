@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 19:58:40 by mlopez-i          #+#    #+#             */
-/*   Updated: 2024/01/15 19:25:33 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:34:51 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,11 @@ int	get_args(int argc, char *argv[], t_data *data)
 	data->time_to_sleep = ft_atoi(argv[4]);
 	if (!str_is_digit(argv[4]) || data->time_to_sleep <= 0)
 		return (0);
-	if (argc == 6)
+	if (argv[5])
 	{
 		data->num_to_eat = ft_atoi(argv[5]);
 		if (!str_is_digit(argv[5]) || data->num_to_eat < 0)
 			return (0);
 	}
-	else
-		data->num_to_eat = 0;
 	return (1);
 }
