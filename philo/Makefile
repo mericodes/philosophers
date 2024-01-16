@@ -6,7 +6,7 @@
 #    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 17:27:16 by codespace         #+#    #+#              #
-#    Updated: 2024/01/16 14:19:34 by codespace        ###   ########.fr        #
+#    Updated: 2024/01/16 16:49:10 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM = rm -f
 CC = cc
 CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address 
 #########
-FILES = args init main utils
+FILES = args get_set init main threads utils
 SRC = $(addsuffix .c, $(FILES))
 vpath %.c src
 #########

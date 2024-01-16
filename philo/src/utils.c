@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:56:24 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/16 14:44:23 by codespace        ###   ########.fr       */
+/*   Updated: 2024/01/16 16:44:17 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,8 @@ void	ft_free(t_data *data)
 	if (data->forks)
 		free(data->forks);
 }
+
+/*long	get_time()
+{
+	
+}*/

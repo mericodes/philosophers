@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:19:15 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/16 14:59:04 by codespace        ###   ########.fr       */
+/*   Updated: 2024/01/16 16:55:25 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	forks_assign(t_philo *philo, t_fork *forks, int i)
 		philo->fst_fork = &forks[i];
 		philo->scnd_fork = &forks[(i + 1) % ph_num];
 	}
-	printf("PHILO ID:::: %i   FIRST FORK:::: %i   SECOND FORK:::: %i\n", 
-		philo->id, philo->fst_fork->fid, philo->scnd_fork->fid);
+	//printf("PHILO ID:::: %i   FIRST FORK:::: %i   SECOND FORK:::: %i\n", 
+	//	philo->id, philo->fst_fork->fid, philo->scnd_fork->fid);
 }
 
 void	philos_init(t_data *data)
@@ -64,6 +64,8 @@ void	philos_init(t_data *data)
 int	data_init(t_data *data)
 {
 	data->end = 0;
+	data->start = 0;
+	pthread_mutex_init(&data->mdata, NULL);
 	data->philos = (t_philo *)malloc(sizeof(t_philo) * data->total_philos);
 	if (!data->philos)
 		return (0);

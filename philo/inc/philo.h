@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:29:34 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/16 14:45:29 by codespace        ###   ########.fr       */
+/*   Updated: 2024/01/16 17:01:01 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,34 @@ typedef struct s_philo
 /*	struct of general data	*/
 struct s_data
 {
-	long		total_philos;
-	long		t_die;
-	long		t_eat;
-	long		t_sleep;
-	long		max_meals;	// flag -1
-	long		t_start;
-	int			end;		//philo dies or philo full
-	t_fork		*forks;		//array forks
-	t_philo		*philos;	//arrau philos
+	long			total_philos;
+	long			t_die;
+	long			t_eat;
+	long			t_sleep;
+	long			max_meals;	// flag -1
+	long			t_start;
+	int				end;		//philo dies or philo full
+	int				start;		//to synch threads
+	pthread_mutex_t	mdata;		//mutex for data
+	t_fork			*forks;		//array forks
+	t_philo			*philos;	//arrau philos
 };
 
 /*	args.c	*/
-int	get_args(int argc, char *argv[], t_data *data);
+int		get_args(int argc, char *argv[], t_data *data);
+
+/*	get_set.c	*/
+int		get_int(pthread_mutex_t *mutex, int *val);
+void	set_int(pthread_mutex_t *mutex, int *dest, int val);
+long	get_long(pthread_mutex_t *mutex, long *val);
+void	set_long(pthread_mutex_t *mutex, long *dest, long val);
+int		sim_end(t_data *data);
 
 /*	init.c	*/
-int	data_init(t_data *data);
+int		data_init(t_data *data);
+
+/*	threads.c	*/
+int		sim_start(t_data *data);
 
 /*	utils.c	*/
 void	ft_error(int error);
