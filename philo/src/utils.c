@@ -3,20 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 19:05:42 by mlopez-i          #+#    #+#             */
-/*   Updated: 2024/01/15 19:06:00 by mlopez-i         ###   ########.fr       */
+/*   Created: 2024/01/16 13:56:24 by codespace         #+#    #+#             */
+/*   Updated: 2024/01/16 14:44:23 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-size_t	get_current_time(void)
+void	ft_error(int error)
 {
-	struct timeval	time;
+	if (error == ARGS_ERROR)
+	{
+		write(1, "Wrong arguments. Try: \n", 23);
+		write(1, "- number_of_philosophers\n- time_to_die\n", 39);
+		write(1, "- time_to_eat\n- time_to_sleep\n", 30);
+		write(1, "- [number_of_times_each_philosopher_must_eat]\n", 46);
+	}
+	if (error == INIT_ERROR)
+		write(1, "Initialization error\n", 21);
+	if (error == THREAD_ERROR)
+		write(1, "Error creating threads\n", 23);
+}
 
-	if (gettimeofday(&time, NULL) == -1)
-		write(2, "gettimeofday() error\n", 22);
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+void	ft_free(t_data *data)
+{
+	if (data->philos)
+		free(data->philos);
+	if (data->forks)
+		free(data->forks);
 }
