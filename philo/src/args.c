@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:02:31 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/16 14:16:16 by codespace        ###   ########.fr       */
+/*   Updated: 2024/01/31 17:53:54 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,7 @@ int	get_args(int argc, char *argv[], t_data *data)
 		if (!str_is_digit(argv[5]) || data->max_meals < 0)
 			return (0);
 	}
+	else
+		data->max_meals = -1;
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:55:12 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/16 16:50:02 by codespace        ###   ########.fr       */
+/*   Updated: 2024/01/31 19:58:45 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,17 @@ int	main(int argc, char *argv[])
 	}
 	if (!data_init(&data))
 	{
-		ft_free(&data);
+		ft_exit(&data);
 		ft_error(INIT_ERROR);
 		return (1);
 	}
-	if (!sim_start(&data))
+	if (!threads_init(&data))
 	{
-		ft_free(&data);
+		ft_exit(&data);
 		ft_error(THREAD_ERROR);
 		return (1);
 	}
-	ft_free(&data);
+	
+	ft_exit(&data);
 	return (0);
 }

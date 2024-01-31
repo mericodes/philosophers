@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:29:34 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/16 17:01:01 by codespace        ###   ########.fr       */
+/*   Updated: 2024/01/31 19:56:12 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,40 +34,37 @@
 
 /*	STRUCTS	*/
 typedef struct s_data t_data;
-/*	struct of forks	*/
-typedef struct s_fork
-{
-	pthread_mutex_t	mfork;
-	int				fid;
-}	t_fork;
+
 
 /*	struct of each philosopher	*/
 typedef struct s_philo
 {
-	pthread_t	tid;
-	int			id;
-	long		meals;
-	int			full;
-	long		last_meal;
-	t_fork		*fst_fork;
-	t_fork		*scnd_fork;
-	t_data		*data;
+	int					id;
+	long				meals;
+	int					full;
+	long				last_meal;
+	pthread_mutex_t		emutex;
+	pthread_mutex_t		*lfork;
+	pthread_mutex_t		rfork;
+	t_data				*data;
 }	t_philo;
 
 /*	struct of general data	*/
 struct s_data
 {
-	long			total_philos;
-	long			t_die;
-	long			t_eat;
-	long			t_sleep;
-	long			max_meals;	// flag -1
-	long			t_start;
-	int				end;		//philo dies or philo full
-	int				start;		//to synch threads
-	pthread_mutex_t	mdata;		//mutex for data
-	t_fork			*forks;		//array forks
-	t_philo			*philos;	//arrau philos
+	long				total_philos;
+	long				t_die;
+	long				t_eat;
+	long				t_sleep;
+	long				max_meals;	// flag -1
+	long				t_start;
+	int					end;		//philo dies or philo full
+	int					start;		//to synch threads
+	pthread_mutex_t		mdata;		//mutex for data
+	pthread_mutex_t		wmutex;		//write mutex
+	pthread_mutex_t		dmutex;		//death mutex
+	pthread_t			*threads;	//array threads
+	t_philo				*philos;	//array philos
 };
 
 /*	args.c	*/
@@ -84,10 +81,15 @@ int		sim_end(t_data *data);
 int		data_init(t_data *data);
 
 /*	threads.c	*/
-int		sim_start(t_data *data);
+void	routine_thread(t_philo *philo);
+void	*routine(void *arg);
 
 /*	utils.c	*/
+long	get_time(long t_start);
+void	ft_usleep(long time);
+void	ft_print(char *str, t_philo *philo);
 void	ft_error(int error);
 void	ft_free(t_data *data);
+void	ft_exit(t_data *data);
 
 #endif
