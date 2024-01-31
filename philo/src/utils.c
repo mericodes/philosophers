@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:56:24 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/31 19:55:55 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:53:04 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,26 @@ long	get_time(long t_start)
 {
 	struct timeval	tv;
 
-	if (gettimeofday(&tv, NULL))
-		return (error("gettimeofday() FAILURE\n", NULL));
+	//if (gettimeofday(&tv, NULL))
+	//	return (ft_error(GET_TIME));
 	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000) - t_start);
 }
 
 void	ft_usleep(long time)
 {
-	time += ft_get_time();
-	while (ft_get_time() <= time)
+	time += get_time(0);
+	while (get_time(0) <= time)
 		usleep(200);
 }
 
 void	ft_print(char *str, t_philo *philo)
 {
 	int	dead;
-	int	time;
 	
 	pthread_mutex_lock(&philo->data->wmutex);
-	pthread_mutex_lock(&philo->data->dmutex);
+	pthread_mutex_lock(&philo->data->fmutex);
 	dead = philo->data->end;
-	pthread_mutex_unlock(&philo->data->dmutex);
+	pthread_mutex_unlock(&philo->data->fmutex);
 	if (!dead)
 		printf("%lu %i %s\n", get_time(philo->data->t_start), philo->id, str);
 	pthread_mutex_unlock(&philo->data->wmutex);
@@ -55,6 +54,8 @@ void	ft_error(int error)
 		write(1, "Initialization error\n", 22);
 	if (error == THREAD_ERROR)
 		write(1, "Error creating threads\n", 24);
+	if (error == GET_TIME)
+		write(1, "gettimeofday() FAILURE\n", 24);
 }
 
 void	ft_free(t_data *data)
@@ -78,6 +79,6 @@ void	ft_exit(t_data *data)
 	}
 	pthread_mutex_destroy(&data->mdata);
 	pthread_mutex_destroy(&data->wmutex);
-	pthread_mutex_destroy(&data->dmutex);
+	pthread_mutex_destroy(&data->fmutex);
 	ft_free(data);
 }

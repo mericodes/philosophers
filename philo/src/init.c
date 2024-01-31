@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:19:15 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/31 19:01:11 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:59:55 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	threads_init(t_data *data)
 	i = 0;
 	while (i < data->total_philos)
 	{
-		data->threads[i] = i;
 		if (pthread_create(&data->threads[i], NULL, &routine, &(data)->philos[i]) != 0)
 			return (0);
 		i++;
@@ -36,7 +35,7 @@ void	philos_init(t_data *data)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].meals = 0;
-		data->philos[i].full = 0;
+		//data->philos[i].full = 0;
 		data->philos[i].last_meal = 0;
 		data->philos[i].data = data;
 		pthread_mutex_init(&data->philos[i].rfork, NULL);
@@ -55,10 +54,10 @@ void	philos_init(t_data *data)
 int	data_init(t_data *data)
 {
 	data->end = 0;
-	data->start = 0;
+	data->t_start = 0;
 	pthread_mutex_init(&data->mdata, NULL);
 	pthread_mutex_init(&data->wmutex, NULL);
-	pthread_mutex_init(&data->dmutex, NULL);
+	pthread_mutex_init(&data->fmutex, NULL);
 	pthread_mutex_lock(&data->mdata);
 	data->philos = (t_philo *)malloc(sizeof(t_philo) * data->total_philos);
 	if (!data->philos)

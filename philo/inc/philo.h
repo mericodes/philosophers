@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:29:34 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/31 19:56:12 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:59:56 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@
 
 
 /*	DEFINES	*/
-# define ARGS_ERROR 0
-# define INIT_ERROR 1
-# define THREAD_ERROR 2
+# define ARGS_ERROR		0
+# define INIT_ERROR		1
+# define THREAD_ERROR	2
+# define GET_TIME		3
 
 
 /*	STRUCTS	*/
@@ -41,7 +42,7 @@ typedef struct s_philo
 {
 	int					id;
 	long				meals;
-	int					full;
+	//int					full;
 	long				last_meal;
 	pthread_mutex_t		emutex;
 	pthread_mutex_t		*lfork;
@@ -57,12 +58,12 @@ struct s_data
 	long				t_eat;
 	long				t_sleep;
 	long				max_meals;	// flag -1
+	long				philo_full;
 	long				t_start;
 	int					end;		//philo dies or philo full
-	int					start;		//to synch threads
 	pthread_mutex_t		mdata;		//mutex for data
 	pthread_mutex_t		wmutex;		//write mutex
-	pthread_mutex_t		dmutex;		//death mutex
+	pthread_mutex_t		fmutex;		//death mutex
 	pthread_t			*threads;	//array threads
 	t_philo				*philos;	//array philos
 };
@@ -78,9 +79,12 @@ void	set_long(pthread_mutex_t *mutex, long *dest, long val);
 int		sim_end(t_data *data);
 
 /*	init.c	*/
+int		threads_init(t_data *data);
+void	philos_init(t_data *data);
 int		data_init(t_data *data);
 
 /*	threads.c	*/
+void	has_ended(t_data *data);
 void	routine_thread(t_philo *philo);
 void	*routine(void *arg);
 
