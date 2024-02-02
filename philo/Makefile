@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
+#    By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 17:27:16 by codespace         #+#    #+#              #
-#    Updated: 2024/01/16 16:49:10 by codespace        ###   ########.fr        #
+#    Updated: 2024/02/02 17:43:33 by mlopez-i         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ NAME = philo
 #########
 RM = rm -f
 CC = cc
-CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address 
+CFLAGS = -Werror -Wextra -Wall -g -fsanitize=thread 
 #########
-FILES = args get_set init main threads utils
+FILES = args errors init main threads utils
 SRC = $(addsuffix .c, $(FILES))
 vpath %.c src
 #########

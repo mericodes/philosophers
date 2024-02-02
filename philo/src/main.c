@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:55:12 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/31 20:48:04 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:14:23 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(int argc, char *argv[])
 		ft_error(THREAD_ERROR);
 		return (1);
 	}
+	data.t_start = get_time(0);
+	pthread_mutex_unlock(&data.mdata);
 	has_ended(&data);
 	ft_exit(&data);
 	return (0);

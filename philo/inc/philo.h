@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:29:34 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/31 20:59:56 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:42:21 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,10 @@ struct s_data
 /*	args.c	*/
 int		get_args(int argc, char *argv[], t_data *data);
 
-/*	get_set.c	*/
-int		get_int(pthread_mutex_t *mutex, int *val);
-void	set_int(pthread_mutex_t *mutex, int *dest, int val);
-long	get_long(pthread_mutex_t *mutex, long *val);
-void	set_long(pthread_mutex_t *mutex, long *dest, long val);
-int		sim_end(t_data *data);
-
+/*	errors.c	*/
+void	ft_error(int error);
+void	ft_free(t_data *data);
+void	ft_exit(t_data *data);
 /*	init.c	*/
 int		threads_init(t_data *data);
 void	philos_init(t_data *data);
@@ -85,15 +82,13 @@ int		data_init(t_data *data);
 
 /*	threads.c	*/
 void	has_ended(t_data *data);
-void	routine_thread(t_philo *philo);
+void	routine_thread(t_philo *philo, long t_start);
 void	*routine(void *arg);
 
 /*	utils.c	*/
+int		ft_strcmp(char *s1, char *s2);
 long	get_time(long t_start);
 void	ft_usleep(long time);
 void	ft_print(char *str, t_philo *philo);
-void	ft_error(int error);
-void	ft_free(t_data *data);
-void	ft_exit(t_data *data);
 
 #endif
