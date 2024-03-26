@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:29:34 by codespace         #+#    #+#             */
-/*   Updated: 2024/02/02 17:42:21 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:06:43 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,20 @@
 /*	gettimeofday	*/
 # include <sys/time.h>
 
-
 /*	DEFINES	*/
 # define ARGS_ERROR		0
 # define INIT_ERROR		1
 # define THREAD_ERROR	2
 # define GET_TIME		3
 
-
 /*	STRUCTS	*/
-typedef struct s_data t_data;
-
+typedef struct s_data	t_data;
 
 /*	struct of each philosopher	*/
 typedef struct s_philo
 {
 	int					id;
 	long				meals;
-	//int					full;
 	long				last_meal;
 	pthread_mutex_t		emutex;
 	pthread_mutex_t		*lfork;
@@ -57,18 +53,20 @@ struct s_data
 	long				t_die;
 	long				t_eat;
 	long				t_sleep;
-	long				max_meals;	// flag -1
+	long				max_meals;
 	long				philo_full;
 	long				t_start;
-	int					end;		//philo dies or philo full
-	pthread_mutex_t		mdata;		//mutex for data
-	pthread_mutex_t		wmutex;		//write mutex
-	pthread_mutex_t		fmutex;		//death mutex
-	pthread_t			*threads;	//array threads
-	t_philo				*philos;	//array philos
+	int					end;
+	pthread_mutex_t		mdata;
+	pthread_mutex_t		wmutex;
+	pthread_mutex_t		fmutex;
+	pthread_t			*threads;
+	t_philo				*philos;
 };
 
 /*	args.c	*/
+int		str_is_digit(char *str);
+long	ft_atol(const char *str);
 int		get_args(int argc, char *argv[], t_data *data);
 
 /*	errors.c	*/
@@ -83,6 +81,7 @@ int		data_init(t_data *data);
 /*	threads.c	*/
 void	has_ended(t_data *data);
 void	routine_thread(t_philo *philo, long t_start);
+void	routine_one(t_philo *philo);
 void	*routine(void *arg);
 
 /*	utils.c	*/

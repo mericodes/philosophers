@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:14:48 by codespace         #+#    #+#             */
-/*   Updated: 2024/02/02 17:48:33 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/03/23 18:16:33 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,12 @@ void	routine_thread(t_philo *philo, long t_start)
 	ft_print("is thinking", philo);
 }
 
+void	routine_one(t_philo *philo)
+{
+	ft_print("has taken a fork (right)", philo);
+	ft_usleep(philo->data->t_die);
+}
+
 void	*routine(void *arg)
 {
 	t_philo	*philo;
@@ -88,6 +94,11 @@ void	*routine(void *arg)
 	pthread_mutex_lock(&philo->data->mdata);
 	t_start = philo->data->t_start;
 	pthread_mutex_unlock(&philo->data->mdata);
+	if (philo->data->total_philos == 1)
+	{
+		routine_one(philo);
+		return ((void *) NULL);
+	}
 	if (philo->id % 2 == 0)
 		ft_usleep(philo->data->t_eat / 10);
 	while (!end)

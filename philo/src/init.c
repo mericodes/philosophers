@@ -6,7 +6,7 @@
 /*   By: mlopez-i <mlopez-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:19:15 by codespace         #+#    #+#             */
-/*   Updated: 2024/02/02 17:48:06 by mlopez-i         ###   ########.fr       */
+/*   Updated: 2024/03/23 18:17:00 by mlopez-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	data_init(t_data *data)
 {
 	data->end = 0;
 	data->t_start = 0;
+	data->philo_full = 0;
 	pthread_mutex_init(&data->mdata, NULL);
 	pthread_mutex_init(&data->wmutex, NULL);
 	pthread_mutex_init(&data->fmutex, NULL);
